@@ -1,0 +1,73 @@
+<p-toast></p-toast>
+<p-table [value]="seasons" dataKey="id" editMode="row">
+  <ng-template pTemplate="colgroup">
+    <colgroup>
+      <col style="width:10%">
+      <col style="width:20%">
+      <col style="width:20%">
+      <col style="width:50%">
+      <col style="width:8rem">
+    </colgroup>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="number">No <p-sortIcon field="number"></p-sortIcon></th>
+      <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
+      <th pSortableColumn="location">Location <p-sortIcon field="location"></p-sortIcon></th>
+      <th pSortableColumn="originalTribe">Original Tribe<p-sortIcon field="originalTribe"></p-sortIcon></th>
+      <th style="width:8rem"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-season let-editing="editing" let-ri="rowIndex">
+    <tr [pEditableRow]="season">
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="number" [(ngModel)]="season.number" required max="50">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{season.number}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="season.title" required maxlength="50">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{season.title}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="season.location" required maxlength="75">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{season.location}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="season.originalTribe" required maxlength="125">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{season.originalTribe}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td style="text-align:center">
+        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
+          (click)="onRowEditInit(season)" class="p-button-rounded p-button-text"></button>
+        <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
+          (click)="onRowEditSave(season)" [disabled]="!isValid(season)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+        <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
+          (click)="onRowEditCancel(season, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

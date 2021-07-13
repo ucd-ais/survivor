@@ -1,0 +1,11 @@
+.header {
+    background: url("/assets/images/jungle.jpg") ;
+    background-repeat: repeat-x;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.header img {
+    height: 160px;
+}
